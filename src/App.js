@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import { Route, Switch } from "react-router";
+import "./App.css";
+import MainPage from "./pages/Main/MainPage";
+import NotePage from "./pages/Note/NotePage";
+import FolderPage from "./pages/Folder/FolderPage";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import store from "./store";
+import Header from "./components/Header/Header";
+import GlobalStateProvider from "./store/GlobalStateProvider";
+
+class App extends Component {
+  render() {
+    return (
+      <div className="App">
+        <GlobalStateProvider>
+          <Header className="App__header" />
+          <Switch className="App-main">
+            <Route exact path="/" component={MainPage} />
+            <Route exact path="/folder/:folderId" component={FolderPage} />
+            <Route exact path="/note/:noteId" component={NotePage} />
+          </Switch>
+        </GlobalStateProvider>
+      </div>
+    );
+  }
 }
 
 export default App;
