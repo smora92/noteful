@@ -14,26 +14,13 @@ function FolderPage() {
   const [notes, setNotes] = useState([]);
   const { folderId } = useParams();
 
-  const filterNote = (folderId) => {
-    console.log("running with ", state.notes);
-    const folderNotes = state.notes.filter((note) => {
+  const filterNote = (notes, folderId) => {
+    const folderNotes = notes.filter((note) => {
       return note.folderId === folderId;
     });
 
     return folderNotes;
   };
-
-  // const fetchNotes = async () => {
-  //   const API_BASE_URL = "http://localhost:9090";
-
-  //   const notes = await fetchData(notesEndpoint);
-
-  //   if (!notes.error) {
-  //     dispatch({ type: "SET_NOTES", payload: notes });
-  //     const folderIdNotesOnly = filterNote(folderId);
-  //     setNotes(folderIdNotesOnly);
-  //   }
-  // };
 
   const fetchFolders = async () => {
     const API_BASE_URL = "http://localhost:9090";
@@ -48,15 +35,15 @@ function FolderPage() {
     const notesEndpoint = API_BASE_URL + "/notes";
 
     const notes = await fetchData(notesEndpoint);
+    const filteredNotes = filterNote(notes, folderId);
 
-    dispatch({ type: "SET_NOTES", payload: notes });
+    dispatch({ type: "SET_NOTES", payload: filteredNotes });
   };
 
   useEffect(() => {
-    console.log("geting here");
     fetchFolders();
     fetchNotes();
-  }, []);
+  }, [folderId]);
 
   return (
     <div>

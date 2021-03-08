@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import AddButton from "../../components/AddButton/AddButton";
-
-import AddNote from "../../components/AddNote/AddNote";
 import NoteContent from "../../components/NoteContent/NoteContent";
 import PageContent from "../../components/PageContent/PageContent";
 import SideBar from "../../components/SideBar/SideBar";

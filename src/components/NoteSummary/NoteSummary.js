@@ -2,7 +2,6 @@ import React from "react";
 import moment from "moment";
 
 import { Link } from "react-router-dom";
-
 import DeleteNote from "../DeleteNote/DeleteNote";
 
 function NoteSummary({ id, name, modified }) {
@@ -15,7 +14,7 @@ function NoteSummary({ id, name, modified }) {
       </Link>
       <div>
         <span>Date modified on {humanFriendlyDate}</span>
-        <DeleteNote />
+        <DeleteNote noteId={id} />
       </div>
     </div>
   );

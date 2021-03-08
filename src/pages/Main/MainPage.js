@@ -1,8 +1,8 @@
 import React, { useContext, useEffect } from "react";
+import { Link } from "react-router-dom";
 import fetchData from "../../utilities/fetch";
 
 import AddButton from "../../components/AddButton/AddButton";
-import AddNote from "../../components/AddNote/AddNote";
 import FolderList from "../../components/FolderList/FolderList";
 import NoteList from "../../components/NoteList/NoteList";
 import PageContent from "../../components/PageContent/PageContent";
@@ -43,7 +43,7 @@ function MainPage() {
       </SideBar>
       <PageContent>
         <NoteList notes={state.notes} />
-        <AddNote />
+        <Link to="/addnote">Add Note</Link>
       </PageContent>
     </div>
   );
