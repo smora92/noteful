@@ -55,10 +55,18 @@ class AddFolder extends Component {
 
   render() {
     return (
-      <div>
-        <form onSubmit={(e) => this.handleSubmit(e)}>
+      <>
+        <form
+          className="Add_folder--form"
+          onSubmit={(e) => this.handleSubmit(e)}
+        >
           <div>
+            <h2>Create a new folder</h2>
+          </div>
+          <div className="form-control">
+            <label htmlFor="name-input">Folder Name:</label>
             <input
+              id="name-input"
               type="text"
               onChange={(e) => this.updateFolderName(e.target.value)}
             />
@@ -66,14 +74,14 @@ class AddFolder extends Component {
               <InputError message={this.validateFolderName()} />
             )}
           </div>
-          <div>
+          <div className="form-control">
             <button type="submit" disabled={this.validateFolderName()}>
-              Add Folder
+              Create Folder
             </button>
             <p>{this.state.postResponse}</p>
           </div>
         </form>
-      </div>
+      </>
     );
   }
 }

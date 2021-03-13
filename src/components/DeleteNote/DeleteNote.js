@@ -18,8 +18,6 @@ function DeleteNote({ noteId }) {
       }
     );
 
-    console.log(await deleteResponse.json());
-
     const notes = state.notes.filter((note) => {
       return note.id !== noteId;
     });
@@ -30,10 +28,14 @@ function DeleteNote({ noteId }) {
 
   return (
     <div>
-      <button onClick={() => deleteNote()}>Delete Note</button>
+      <button className="Delete_button" onClick={() => deleteNote()}>
+        Delete Note
+      </button>
       {isDeleted && <Redirect to="/" />}
     </div>
   );
 }
+
+// Validate props, noteId > string
 
 export default DeleteNote;

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
+import AddButton from "../../components/AddButton/AddButton";
 
 import AddNote from "../../components/AddNote/AddNote";
 import FolderList from "../../components/FolderList/FolderList";
@@ -46,16 +47,18 @@ function FolderPage() {
   }, [folderId]);
 
   return (
-    <div>
+    <>
       <SideBar>
         <FolderList folders={state.folders} activeFolderId={folderId} />
-        {/* <AddButton /> */}
+        <AddButton />
       </SideBar>
       <PageContent>
         <NoteList notes={state.notes} />
-        {/* <AddNote /> */}
+        <Link className="Add_note--link" to="/addnote">
+          Add Note
+        </Link>
       </PageContent>
-    </div>
+    </>
   );
 }
 export default FolderPage;

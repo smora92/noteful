@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import fetch from "node-fetch";
 import InputError from "../ValidationError/InputError";
+import FolderList from "../FolderList/FolderList";
+import propTypes from "prop-types";
 
 class AddNote extends Component {
   constructor(props) {
@@ -74,38 +76,51 @@ class AddNote extends Component {
     ));
 
     return (
-      <div>
-        <form onSubmit={(e) => this.handleSubmit(e)}>
+      <>
+        <form className="Add_note--form" onSubmit={(e) => this.handleSubmit(e)}>
           <div>
+            <h2>Create a new note</h2>
+          </div>
+          <div className="form-control">
+            <label htmlFor="note-name">Note Name</label>
             <input
+              id="note-name"
               type="text"
               className="note_name"
               onChange={(e) => this.updateName(e.target.value)}
             />
+            {this.state.name.touched && (
+              <InputError message={this.validateName()} />
+            )}
           </div>
 
-          <div>
+          <div className="form-control">
+            <label htmlFor="note-content">Note Content</label>
             <textarea
+              id="note-content"
               onChange={(e) => this.updateContent(e.target.value)}
             ></textarea>
           </div>
-          {this.state.name.touched && (
-            <InputError message={this.validateName()} />
-          )}
-
-          <label htmlFor="folderName">
-            <select onChange={(e) => this.updateFolder(e)}>
+          <div className="form-control">
+            <label htmlFor="folderName">Note Folder</label>
+            <select id="folderName" onChange={(e) => this.updateFolder(e)}>
               <option value="Important">Select Folder</option>
               {folders}
             </select>
-          </label>
-          <button type="submit" disabled={this.validateName()}>
-            AddNote
-          </button>
+          </div>
+          <div className="form-control">
+            <button type="submit" disabled={this.validateName()}>
+              AddNote
+            </button>
+          </div>
           <p>{this.state.postResponse}</p>
         </form>
-      </div>
+      </>
     );
   }
 }
+AddNote.propTypes = {
+  folders: propTypes.array,
+};
+//Here validate props, type is an array
 export default AddNote;

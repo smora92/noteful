@@ -1,4 +1,5 @@
 import React from "react";
+import propTypes from "prop-types";
 
 import NoteSummary from "../NoteSummary/NoteSummary";
 
@@ -19,5 +20,10 @@ function NoteList({ notes }) {
     </div>
   );
 }
+
+NoteList.propTypes = {
+  notes: propTypes.array,
+};
+// Props validation., notes -> aray
 
 export default NoteList;

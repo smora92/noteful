@@ -36,16 +36,18 @@ function MainPage() {
     fetchNoteAndFolders();
   }, []);
   return (
-    <div>
+    <>
       <SideBar>
         <FolderList folders={state.folders} />
         <AddButton />
       </SideBar>
       <PageContent>
         <NoteList notes={state.notes} />
-        <Link to="/addnote">Add Note</Link>
+        <Link className="Add_note--link" to="/addnote">
+          Add Note
+        </Link>
       </PageContent>
-    </div>
+    </>
   );
 }
 export default MainPage;

@@ -1,6 +1,8 @@
 import React from "react";
 
 import { Link } from "react-router-dom";
+import FolderPage from "../../pages/Folder/FolderPage";
+import propTypes from "prop-types";
 
 function FolderList({ folders, activeFolderId }) {
   return (
@@ -15,5 +17,10 @@ function FolderList({ folders, activeFolderId }) {
     </ul>
   );
 }
+FolderList.propTypes = {
+  folders: propTypes.array,
+  activeFolderId: propTypes.string,
+};
+// Props, folders = Array, activeFolderId -> String
 
 export default FolderList;

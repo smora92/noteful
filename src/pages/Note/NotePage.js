@@ -39,10 +39,12 @@ function NotePage() {
   }, [findNoteById, findFolderById]);
 
   return (
-    <div>
+    <>
       <SideBar>
-        <button onClick={() => history.goBack()}>Go back</button>
-        <span>{folder.name}</span>
+        <button className="Back_button" onClick={() => history.goBack()}>
+          Go back
+        </button>
+        <span class="Current_folder">{folder.name}</span>
       </SideBar>
       <PageContent>
         <NoteContent
@@ -52,7 +54,7 @@ function NotePage() {
           content={note.content}
         />
       </PageContent>
-    </div>
+    </>
   );
 }
 export default NotePage;

@@ -1,39 +1,175 @@
+li {
+  list-style: none;
+}
+
 .App {
   --custom-font: Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
     "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
-  display: grid;
-  grid-template-areas: "sidebar header" "sidebar main";
-  grid-template-columns: 1fr 2.3fr;
-  grid-template-rows: 120px 1fr;
-  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-.App__nav {
-  background-color: #0b1b32;
-  color: #fff;
-  grid-area: sidebar;
-  height: 100vh;
-  overflow: auto;
+.App_body {
+  display: flex;
+  flex-direction: row;
+  padding-top: 0.5em;
 }
 
-.App__header {
-  background-color: #0b1f3a;
-  color: #bdbdbd;
-  font-family: var(--custom-font);
-  grid-area: header;
-  padding-left: 16px;
-  padding-top: 32px;
-  text-shadow: 2px 1px 2px black;
+.App_header {
+  border-bottom: 2px solid #333;
+  flex-basis: 180px;
+  display: flex;
+  align-items: center;
+  /* background: teal;
+  color: #fff */
 }
 
-.App__header a {
-  color: #bdbdbd;
+.App_title {
+  margin: auto;
+  font-size: 3.5em;
 }
 
-.App__main {
-  background-color: #102541;
-  grid-area: main;
-  height: calc(100vh - 120px);
-  overflow: auto;
+.App_title a {
+  text-decoration: none;
+  color: #333;
+}
+
+.App_content {
+  width: 70%;
+}
+
+.App_sidebar {
+  width: 20%;
+  padding-left: 1.5em;
+  display: flex;
+  flex-direction: column;
+  /* background: teal; */
+  /* border-right: 2px solid #333; */
+}
+
+.App_sidebar ul {
+  list-style: none;
+  /* padding-left: 0; */
+}
+
+.App_sidebar ul li {
+  padding-top: 1.5em;
+  padding-bottom: 1.5em;
+  /* border: 2px solid #333; */
+}
+
+.App_sidebar ul li a,
+.AddButton_wrapper a {
+  font-size: 28px;
+  text-decoration: none;
+  color: #333;
+}
+
+.AddButton_wrapper {
+  padding-top: 1em;
+  padding-bottom: 1em;
+  /* border: 2px solid #333; */
+}
+
+.Note_summary--wrapper {
+  border: 2px solid #333;
+  padding: 1em;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.Note_summary--title {
+  text-decoration: none;
+  color: #333;
+  line-height: 2.5em;
+}
+
+.Note_summary--title h1 {
+  font-size: 2.5em;
+}
+
+.Note_summary--body {
+  display: flex;
+  line-height: 1.5em;
+}
+
+.Note_summary--body span {
+  width: 88%;
+}
+
+.Delete_button {
+  padding: 0.5em;
+  font-size: 13px;
+}
+
+.Add_note--link {
+  margin-left: 2.5em;
+  margin-bottom: 7px;
+  color: #333;
+  text-decoration: none;
+  padding: 10px;
+  background: rgb(239, 239, 239);
+  border: 1px solid rgb(118, 118, 118);
+}
+
+.Note_content {
+  line-height: 2.5em;
+  text-align: justify;
+}
+
+.Back_button {
+  padding: 0.5em;
+  margin: 1.5em;
+}
+
+.Current_folder {
+  padding: 0.5em;
+  margin: 1.5em;
+  font-size: 1.5em;
+}
+
+.Add_folder--form,
+.Add_note--form {
+  border: 2px solid #333;
+  display: flex;
+  flex-direction: column;
+  padding-left: 1.8em;
+}
+
+.Add_folder--form .form-control,
+.Add_note--form .form-control {
+  padding-top: 0.3em;
+  padding-bottom: 0.3em;
+}
+
+.form-control > label {
+  display: block;
+  font-size: 0.8em;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+.form-control > button {
+  display: block;
+  padding: 0.5em;
+}
+
+.form-control > input {
+  padding: 0.5em;
+  width: 13em;
+}
+
+.form-control select {
+  padding: 0.5em;
+  width: 13em;
+}
+
+.form-control textarea {
+  width: 14em;
+  height: 100px;
+}
+.input-error {
+  color: rgb(241, 138, 138);
 }
