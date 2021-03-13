@@ -23,8 +23,4 @@ function AddNotePage() {
   );
 }
 
-// AddNote.prototype = {
-//   note: PropTypes.string,
-// };
-
 export default AddNotePage;

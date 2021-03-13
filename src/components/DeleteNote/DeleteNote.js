@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import fetch from "node-fetch";
 import { Redirect } from "react-router-dom";
 import Context from "../../store/Context";
+import propTypes from "prop-types";
 
 function DeleteNote({ noteId }) {
   const { state, dispatch } = useContext(Context);
