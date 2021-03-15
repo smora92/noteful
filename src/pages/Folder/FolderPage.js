@@ -1,8 +1,7 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, {  useEffect, useContext } from "react";
 import { useParams, Link } from "react-router-dom";
 import AddButton from "../../components/AddButton/AddButton";
 
-import AddNote from "../../components/AddNote/AddNote";
 import FolderList from "../../components/FolderList/FolderList";
 import NoteList from "../../components/NoteList/NoteList";
 import PageContent from "../../components/PageContent/PageContent";
@@ -12,7 +11,6 @@ import fetchData from "../../utilities/fetch";
 
 function FolderPage() {
   const { state, dispatch } = useContext(Context);
-  const [notes, setNotes] = useState([]);
   const { folderId } = useParams();
 
   const filterNote = (notes, folderId) => {

@@ -13,10 +13,10 @@ function NoteContent({ id, name, modified, content }) {
 }
 
 NoteContent.propTypes = {
-  id: propTypes.string,
-  name: propTypes.string,
-  modified: propTypes.string,
-  content: propTypes.string,
+  id: propTypes.string.isRequired,
+  name: propTypes.string.isRequired,
+  modified: propTypes.string.isRequired,
+  content: propTypes.string.isRequired,
 };
 // String props validation
 export default NoteContent;

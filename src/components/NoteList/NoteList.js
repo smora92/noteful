@@ -22,7 +22,7 @@ function NoteList({ notes }) {
 }
 
 NoteList.propTypes = {
-  notes: propTypes.array,
+  notes: propTypes.array.isRequired,
 };
 // Props validation., notes -> aray
 

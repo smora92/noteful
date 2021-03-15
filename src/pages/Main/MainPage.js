@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import fetchData from "../../utilities/fetch";
 
@@ -12,6 +12,7 @@ import Context from "../../store/Context";
 
 function MainPage() {
   const { state, dispatch } = useContext(Context);
+  const [fetchError, setFetchErrors] = useState('')
 
   const fetchNoteAndFolders = async () => {
     const API_BASE_URL = "http://localhost:9090";
@@ -25,10 +26,14 @@ function MainPage() {
 
     if (!notes.error) {
       dispatch({ type: "SET_NOTES", payload: notes });
+    } else {
+      setFetchErrors(fetchError => `Unable to get notes: server error`);
     }
 
     if (!folders.error) {
       dispatch({ type: "SET_FOLDERS", payload: folders });
+    } else {
+      setFetchErrors(fetchError => `${fetchError} | Unable to get folders: server error`);
     }
   };
 
@@ -43,6 +48,7 @@ function MainPage() {
       </SideBar>
       <PageContent>
         <NoteList notes={state.notes} />
+        <p>{fetchError}</p>
         <Link className="Add_note--link" to="/addnote">
           Add Note
         </Link>

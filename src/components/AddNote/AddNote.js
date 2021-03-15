@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import fetch from "node-fetch";
 import InputError from "../ValidationError/InputError";
-import FolderList from "../FolderList/FolderList";
 import propTypes from "prop-types";
 
 class AddNote extends Component {
@@ -14,9 +13,11 @@ class AddNote extends Component {
       },
       content: {
         value: "",
+        touched: false,
       },
       folder: {
         value: "",
+        touched: false,
       },
       postResponse: "",
     };
@@ -31,11 +32,11 @@ class AddNote extends Component {
     });
   }
   updateContent(content) {
-    this.setState({ content: { value: content } });
+    this.setState({ content: { value: content, touched: true } });
   }
   updateFolder(folder) {
-    console.log("f", folder.target.value);
-    this.setState({ folder: { value: folder } });
+    this.setState({ folder: { value: folder, touched: true } });
+
   }
 
   validateName() {
@@ -46,26 +47,51 @@ class AddNote extends Component {
       return "Name must be at least 3 characters long";
     }
   }
+  validateContent(){
+    const content = this.state.content.value.trim();
+    if (content.length === 0){
+      return 'content is required';
+    } else if (content.length < 10) {
+      return '10 characters or more'
+    }
+  }
+
+  validateFolder(){
+    const folder = this.state.folder.value.trim();
+    if (folder.length === 0){
+      return 'Please select a folder';
+    }
+  }
+
 
   async handleSubmit(e) {
     e.preventDefault();
     const API_BASE_URL = "http://localhost:9090";
     const endpoint = API_BASE_URL + "/notes";
-    const postResponse = await fetch(endpoint, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ name: this.state.name.value.trim() }),
-    });
-    const postResponseJSON = await postResponse.json();
 
-    if (postResponseJSON.id) {
-      this.setState({ postResponse: "note created successfully" });
+    try {
+      const postResponse = await fetch(endpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name: this.state.name.value.trim() }),
+      });
+      const postResponseJSON = await postResponse.json();
+  
+      if (postResponseJSON.id) {
+        this.setState({ postResponse: "note created successfully" });
+        return;
+      } else {
+        this.setState({ postResponse: "Unable to create note " });
+        return;
+      }
+
+    } catch(err) {
+      this.setState({ postResponse: "Server Errror: Unable to create note " });
       return;
     }
 
-    this.setState({ postResponse: "Unable to create note " });
   }
 
   render() {
@@ -100,16 +126,22 @@ class AddNote extends Component {
               id="note-content"
               onChange={(e) => this.updateContent(e.target.value)}
             ></textarea>
+            {this.state.content.touched && (
+              <InputError message={this.validateContent()} />
+            )}
           </div>
           <div className="form-control">
             <label htmlFor="folderName">Note Folder</label>
-            <select id="folderName" onChange={(e) => this.updateFolder(e)}>
-              <option value="Important">Select Folder</option>
+            <select id="folderName" onChange={(e) => this.updateFolder(e.target.value)}>
+              <option value="">Select Folder</option>
               {folders}
             </select>
+             {this.state.folder.touched && (
+              <InputError message={this.validateFolder()} />
+            )}
           </div>
           <div className="form-control">
-            <button type="submit" disabled={this.validateName()}>
+            <button type="submit" disabled={this.validateName() || this.validateContent() || this.validateFolder()}>
               AddNote
             </button>
           </div>
@@ -120,7 +152,7 @@ class AddNote extends Component {
   }
 }
 AddNote.propTypes = {
-  folders: propTypes.array,
+  folders: propTypes.array.isRequired
 };
 //Here validate props, type is an array
 export default AddNote;

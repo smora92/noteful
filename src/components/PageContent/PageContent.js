@@ -6,7 +6,7 @@ function PageContent({ children }) {
 }
 
 PageContent.propTypes = {
-  children: propTypes.node,
+  children: propTypes.node.isRequired,
 };
 // Children -> React.ReactNode
 

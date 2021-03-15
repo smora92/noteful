@@ -3,11 +3,10 @@ import { useHistory } from "react-router-dom";
 import AddNote from "../../components/AddNote/AddNote";
 import PageContent from "../../components/PageContent/PageContent";
 import Context from "../../store/Context";
-import PropTypes from "prop-types";
 import SideBar from "../../components/SideBar/SideBar";
 
 function AddNotePage() {
-  const { state, dispatch } = useContext(Context);
+  const { state } = useContext(Context);
   const history = useHistory();
   return (
     <>
