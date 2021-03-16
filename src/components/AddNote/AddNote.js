@@ -47,18 +47,18 @@ class AddNote extends Component {
       return "Name must be at least 3 characters long";
     }
   }
-  validateContent(){
+  validateContent() {
     const content = this.state.content.value.trim();
-    if (content.length === 0){
+    if (content.length === 0) {
       return 'content is required';
     } else if (content.length < 10) {
       return '10 characters or more'
     }
   }
 
-  validateFolder(){
+  validateFolder() {
     const folder = this.state.folder.value.trim();
-    if (folder.length === 0){
+    if (folder.length === 0) {
       return 'Please select a folder';
     }
   }
@@ -75,10 +75,14 @@ class AddNote extends Component {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ name: this.state.name.value.trim() }),
+        body: JSON.stringify({
+          name: this.state.name.value.trim(),
+          content: this.state.content.value.trim(),
+          folderId: this.state.folder.value,
+        }),
       });
       const postResponseJSON = await postResponse.json();
-  
+
       if (postResponseJSON.id) {
         this.setState({ postResponse: "note created successfully" });
         return;
@@ -87,7 +91,7 @@ class AddNote extends Component {
         return;
       }
 
-    } catch(err) {
+    } catch (err) {
       this.setState({ postResponse: "Server Errror: Unable to create note " });
       return;
     }
@@ -96,7 +100,7 @@ class AddNote extends Component {
 
   render() {
     const folders = this.props.folders.map((folder) => (
-      <option key={folder.id} value={folder.name}>
+      <option key={folder.id} value={folder.id}>
         {folder.name}
       </option>
     ));
@@ -136,7 +140,7 @@ class AddNote extends Component {
               <option value="">Select Folder</option>
               {folders}
             </select>
-             {this.state.folder.touched && (
+            {this.state.folder.touched && (
               <InputError message={this.validateFolder()} />
             )}
           </div>

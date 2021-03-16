@@ -1,4 +1,4 @@
-import React, {  useEffect, useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import { useParams, Link } from "react-router-dom";
 import AddButton from "../../components/AddButton/AddButton";
 

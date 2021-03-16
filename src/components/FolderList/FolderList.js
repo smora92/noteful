@@ -18,7 +18,7 @@ function FolderList({ folders, activeFolderId }) {
 }
 FolderList.propTypes = {
   folders: propTypes.array.isRequired,
-  activeFolderId: propTypes.string.isRequired,
+  activeFolderId: propTypes.string,
 };
 // Props, folders = Array, activeFolderId -> String
 

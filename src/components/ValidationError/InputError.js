@@ -6,7 +6,7 @@ function InputError({ message }) {
 }
 
 InputError.propTypes = {
-  message: propTypes.string.isRequired,
+  message: propTypes.string,
 };
 //Message: string
 export default InputError;

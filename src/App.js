@@ -10,7 +10,7 @@ import AddFolderPage from "./pages/AddFolderPage/AddFolderPage";
 import AddNotePage from "./pages/AddNotePage/AddNotePage";
 
 import "./App.css";
-import ErrorBoundary from "./components/ErrorBoundary /ErrorBoundary";
+import ErrorBoundary from "./components/ErrorBoundary/ErrorBoundary";
 
 class App extends Component {
   render() {
@@ -18,25 +18,39 @@ class App extends Component {
       <div className="App">
         <GlobalStateProvider>
           <Header />
-          <Switch>
-            <div className="App_body">
-              <ErrorBoundary>
-                <Route exact path="/" component={MainPage} />
-              </ErrorBoundary>
-              <ErrorBoundary>
-                <Route exact path="/folder/:folderId" component={FolderPage} />
-              </ErrorBoundary>
-              <ErrorBoundary>
-                <Route exact path="/note/:noteId" component={NotePage} />
-              </ErrorBoundary>
-              <ErrorBoundary>
-                <Route exact path="/addfolder" component={AddFolderPage} />
-              </ErrorBoundary>
-              <ErrorBoundary>
-                <Route exact path="/addnote" component={AddNotePage} />
-              </ErrorBoundary>
-            </div>
-          </Switch>
+          <div className="App_body">
+            <Switch>
+              <Route exact path="/">
+                <ErrorBoundary>
+                  <MainPage />
+                </ErrorBoundary>
+              </Route>
+
+              <Route exact path="/folder/:folderId" >
+                <ErrorBoundary>
+                  <FolderPage />
+                </ErrorBoundary>
+              </Route>
+
+              <Route exact path="/note/:noteId" >
+                <ErrorBoundary>
+                  <NotePage />
+                </ErrorBoundary>
+              </Route>
+
+              <Route exact path="/addfolder">
+                <ErrorBoundary>
+                  <AddFolderPage />
+                </ErrorBoundary>
+              </Route>
+
+              <Route exact path="/addnote">
+                <ErrorBoundary>
+                  <AddNotePage />
+                </ErrorBoundary>
+              </Route>
+            </Switch>
+          </div>
         </GlobalStateProvider>
       </div>
     );
