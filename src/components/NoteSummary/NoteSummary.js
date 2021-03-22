@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import moment from "moment";
 
 import { Link } from "react-router-dom";
@@ -6,6 +6,7 @@ import DeleteNote from "../DeleteNote/DeleteNote";
 import propTypes from "prop-types";
 
 function NoteSummary({ id, name, modified }) {
+
   const humanFriendlyDate = moment(modified).format("Do MMM YYYY");
 
   return (

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import fetch from "node-fetch";
 import { Redirect } from "react-router-dom";
 import Context from "../../store/Context";
@@ -9,9 +9,11 @@ function DeleteNote({ noteId }) {
   const [deleteError, setDeleteError] = useState('');
   const [isDeleted, setIsDeleted] = useState(false);
 
+  let isMounted = true;
+
   const deleteNote = async () => {
     try {
-     const deleteResponse = await fetch(`http://localhost:9090/notes/${noteId}`,
+      const deleteResponse = await fetch(`http://localhost:9090/notes/${noteId}`,
         {
           method: "DELETE",
           headers: {
@@ -19,21 +21,31 @@ function DeleteNote({ noteId }) {
           },
         }
       );
-   if (deleteResponse.status === 200) {
-     const notes = state.notes.filter((note) => {
-       return note.id !== noteId;
-     });
-     dispatch({ type: "SET_NOTES", payload: notes });
-     setIsDeleted(true);
-     return;
+      if (deleteResponse.status === 200) {
+        const notes = state.notes.filter((note) => {
+          return note.id !== noteId;
+        });
 
-   }
-   setDeleteError('Unable to delete');
-    return;
-    } catch(err) {
+        if (isMounted) {
+          dispatch({ type: "SET_NOTES", payload: notes });
+          setIsDeleted(true);
+
+        }
+        return;
+
+      }
+      setDeleteError('Unable to delete');
+      return;
+    } catch (err) {
       setDeleteError('Server Error');
     }
   };
+
+  useEffect(() => {
+    return () => {
+      isMounted = false;
+    }
+  }, [])
 
   return (
     <div>
@@ -45,7 +57,7 @@ function DeleteNote({ noteId }) {
     </div>
   );
 }
-DeleteNote.propTypes= {
+DeleteNote.propTypes = {
   noteId: propTypes.string.isRequired
 }
 // Validate props, noteId > string
