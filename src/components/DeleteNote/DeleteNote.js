@@ -13,7 +13,7 @@ function DeleteNote({ noteId }) {
 
   const deleteNote = async () => {
     try {
-      const deleteResponse = await fetch(`http://localhost:9090/notes/${noteId}`,
+      const deleteResponse = await fetch(`${process.env.REACT_APP_API_BASE_URL}/notes/${noteId}`,
         {
           method: "DELETE",
           headers: {
@@ -21,7 +21,7 @@ function DeleteNote({ noteId }) {
           },
         }
       );
-      if (deleteResponse.status === 200) {
+      if (deleteResponse.status === 204) {
         const notes = state.notes.filter((note) => {
           return note.id !== noteId;
         });

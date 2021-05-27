@@ -22,7 +22,7 @@ function FolderPage() {
   };
 
   const fetchFolders = async () => {
-    const API_BASE_URL = "http://localhost:9090";
+    const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
     const folderEndpoint = API_BASE_URL + "/folders";
     const folders = await fetchData(folderEndpoint);
 
@@ -30,7 +30,7 @@ function FolderPage() {
   };
 
   const fetchNotes = async () => {
-    const API_BASE_URL = "http://localhost:9090";
+    const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
     const notesEndpoint = API_BASE_URL + "/notes";
 
     const notes = await fetchData(notesEndpoint);

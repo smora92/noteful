@@ -66,7 +66,7 @@ class AddNote extends Component {
 
   async handleSubmit(e) {
     e.preventDefault();
-    const API_BASE_URL = "http://localhost:9090";
+    const API_BASE_URL = `${process.env.REACT_APP_API_BASE_URL}`;
     const endpoint = API_BASE_URL + "/notes";
 
     try {

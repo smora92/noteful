@@ -32,30 +32,31 @@ class AddFolder extends Component {
     }
   }
 
+
   async handleSubmit(e) {
     e.preventDefault()
-    const API_BASE_URL = "http://localhost:9090";
+    const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
     const endpoint = API_BASE_URL + "/folders";
     try {
-    const postResponse = await fetch(endpoint, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ name: this.state.folderName.value.trim() }),
-    });
-    const postResponseJSON = await postResponse.json();
+      const postResponse = await fetch(endpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name: this.state.folderName.value.trim() }),
+      });
+      const postResponseJSON = await postResponse.json();
 
-    if (postResponseJSON.id) {
-      this.setState({ postResponse: "Folder created successfully" });
+      if (postResponseJSON.id) {
+        this.setState({ postResponse: "Folder created successfully" });
+        return;
+      } else {
+        this.setState({ postResponse: "Unable to create folder " });
+        return;
+      }
+    } catch (err) {
+      this.setState({ postResponse: "Server Error, unable to create folder" });
       return;
-    } else {
-      this.setState({ postResponse: "Unable to create folder " });
-      return;
-    }
-  } catch(err) {
-    this.setState({ postResponse: "Server Error, unable to create folder" });
-    return;
     }
   }
 
